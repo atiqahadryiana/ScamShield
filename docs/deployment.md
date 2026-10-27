@@ -1,5 +1,33 @@
 # Deployment
 
+## Vercel Services
+
+The root `vercel.json` defines two services in one Vercel project:
+
+- `backend`: FastAPI from `backend/`, publicly routed at `/api/*`.
+- `frontend`: Vite from `frontend/`, publicly routed for all remaining paths.
+
+The browser uses same-origin `/api/v1/*` requests, so there is no server-side
+service-to-service call and no service binding. Vercel bindings are runtime-only
+and cannot be consumed by a static Vite build or browser code. Services routing
+preserves the `/api` prefix, matching FastAPI's existing `/api/v1` routes.
+
+Before deployment, set `ENVIRONMENT=production` and a managed PostgreSQL
+`DATABASE_URL` in Vercel Project Settings. SQLite and local filesystems are not
+durable serverless storage. Apply Alembic migrations to that database from a
+trusted administrative environment before serving traffic. Do not set
+`VITE_API_BASE_URL`; the frontend should use the shared deployment origin.
+
+OCR requires a Tesseract executable and language packs. The standard Vercel
+Python function does not install the repository's Docker image packages, so OCR
+will return its documented 503 fallback unless the backend is changed to a
+container service or another OCR implementation is configured. The Telegram
+polling process is not included as a Vercel service because it is a continuous
+worker; deploy it separately or implement an HTTPS webhook function.
+
+Run all declared services locally with `vercel dev -L` after installing the
+Vercel CLI.
+
 ## Local Docker stack
 
 Install Docker Engine/Desktop with Compose, then from the project root run `docker compose up --build -d`. Frontend: http://localhost:8080; backend docs: http://127.0.0.1:8000/docs. Database volumes persist across restarts. The non-root Python backend includes English/Malay Tesseract language data. Nginx serves the React build, rewrites deep routes and proxies `/api/` to FastAPI with a 6 MB request limit and security headers.

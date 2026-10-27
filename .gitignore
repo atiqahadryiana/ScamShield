@@ -19,3 +19,4 @@ datasets/processed/*.csv
 playwright-report/
 test-results/
 .local/
+.vercel/

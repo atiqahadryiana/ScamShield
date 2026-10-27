@@ -1,7 +1,9 @@
 import json
 import logging
+import os
 import time
 from contextlib import asynccontextmanager
+from urllib.parse import urlsplit
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
@@ -22,6 +24,22 @@ logging.basicConfig(level=logging.INFO, format='%(message)s')
 logging.getLogger('httpx').setLevel(logging.WARNING)
 logging.getLogger('httpcore').setLevel(logging.WARNING)
 limiter = RateLimiter()
+
+
+def same_origin(request: Request, origin: str) -> bool:
+    """Accept the deployment's own origin without hardcoding preview domains."""
+    try:
+        parsed = urlsplit(origin)
+    except ValueError:
+        return False
+    hosts = {request.headers.get('host', '').casefold()}
+    # Vercel documents x-forwarded-host as the original public host and
+    # prevents clients from supplying it directly to a Function. Local Services
+    # development proxies from loopback without setting VERCEL=1.
+    client_host = request.client.host if request.client else ''
+    if os.getenv('VERCEL') == '1' or client_host in {'127.0.0.1', '::1'}:
+        hosts.add(request.headers.get('x-forwarded-host', '').casefold())
+    return parsed.scheme in {'http', 'https'} and bool(parsed.netloc) and parsed.netloc.casefold() in hosts
 
 
 @asynccontextmanager
@@ -49,7 +67,7 @@ async def guard(request: Request, call_next):
         return JSONResponse({'error': {'code': 'too_large', 'message': 'Request exceeds the upload limit.'}}, 413)
     if request.method in {'POST', 'PUT', 'DELETE'}:
         origin = request.headers.get('origin')
-        if origin and origin not in origins:
+        if origin and origin not in origins and not same_origin(request, origin):
             return JSONResponse({'error': {'code': 'forbidden', 'message': 'Request origin is not allowed.'}}, 403)
         if request.headers.get('x-scamshield-client') != 'web':
             return JSONResponse({'error': {'code': 'forbidden', 'message': 'Required client header missing.'}}, 403)

@@ -5,6 +5,8 @@ from app.core.database import get_db
 from app.main import app
 from app.models.entities import User, ScanRecord, now
 from app.services.ocr import OCRUnavailable
+from app.main import same_origin
+from starlette.requests import Request
 
 
 def account(client, email='reader@example.test'):
@@ -49,6 +51,17 @@ def test_csrf_and_rate_limit(client):
     assert client.post('/api/v1/scan/text', json={'text': 'hello'}, headers={'X-ScamShield-Client': ''}).status_code == 403
     codes = [client.post('/api/v1/scan/text', json={'text': 'hello'}).status_code for _ in range(31)]
     assert 429 in codes
+
+
+def test_same_origin_supports_dynamic_deployment_hosts():
+    scope = {'type': 'http', 'method': 'POST', 'path': '/', 'headers': [(b'host', b'preview.example.test')]}
+    request = Request(scope)
+    assert same_origin(request, 'https://preview.example.test') is True
+    assert same_origin(request, 'https://attacker.example.test') is False
+    proxied = Request({'type': 'http', 'method': 'POST', 'path': '/', 'client': ('::1', 3000), 'headers': [(b'host', b'internal.test'), (b'x-forwarded-host', b'preview.example.test')]})
+    assert same_origin(proxied, 'https://preview.example.test') is True
+    untrusted = Request({'type': 'http', 'method': 'POST', 'path': '/', 'client': ('203.0.113.2', 3000), 'headers': [(b'host', b'internal.test'), (b'x-forwarded-host', b'preview.example.test')]})
+    assert same_origin(untrusted, 'https://preview.example.test') is False
 
 
 def test_url_and_resources(client):

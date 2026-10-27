@@ -106,6 +106,10 @@ docker compose -f docker-compose.yml -f docker-compose.postgres.yml --profile ma
 
 Do not use `down -v` unless you intend to destroy database volumes. Docker execution requires a Docker host and is separate from the verified native application. [Deployment guide](docs/deployment.md).
 
+## Vercel Services
+
+`vercel.json` deploys the Vite frontend and FastAPI backend as one Services project. Public `/api/*` requests reach the backend; all other paths reach the frontend. Configure `ENVIRONMENT=production` and a managed PostgreSQL `DATABASE_URL`, then apply Alembic migrations before serving traffic. The static frontend uses same-origin API requests, so no service binding is declared. See [deployment details](docs/deployment.md#vercel-services), including OCR and Telegram worker limitations.
+
 ## AI status and limits
 
 Active engine: **explainable-rules-v1**. Score is the capped sum of bilingual warning-indicator weights, **not fraud probability**. LOW <25, MEDIUM 25–59, HIGH ≥60. Rules can miss unfamiliar scams or flag legitimate content. Always independently verify important requests.
