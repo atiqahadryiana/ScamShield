@@ -8,7 +8,7 @@ from sqlalchemy import delete, select, func
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from app.core.config import get_settings
-from app.core.database import get_db
+from app.core.database import EPHEMERAL_DATABASE, get_db
 from app.core.security import optional_user, current_user, admin_user, password_hasher, verify_password, digest
 from app.models.entities import User, Session as LoginSession, ScanRecord, AwarenessMetric, LearningModule, QuizQuestion, QuizAttempt, Notice, AuditLog
 from app.schemas.requests import ScanInput, URLInput, Credentials, QuizInput, NoticeInput, Assessment, PreferencesInput
@@ -40,7 +40,7 @@ def health(db: DB):
     db.execute(select(1))
     settings = get_settings()
     ml = get_runtime().status()
-    return {'status': 'ok', 'engine': 'explainable-rules-v1' if set(ml.values()) == {'rules_only'} else 'validated-ml-with-rule-explanations-v1', 'ml_status': ml, 'ocr_available': bool(shutil.which(settings.tesseract_cmd or 'tesseract')), 'telegram_configured': bool(settings.telegram_bot_token), 'telegram_username': settings.telegram_bot_username or None}
+    return {'status': 'ok', 'engine': 'explainable-rules-v1' if set(ml.values()) == {'rules_only'} else 'validated-ml-with-rule-explanations-v1', 'ml_status': ml, 'storage': 'ephemeral' if EPHEMERAL_DATABASE else 'persistent', 'ocr_available': bool(shutil.which(settings.tesseract_cmd or 'tesseract')), 'telegram_configured': bool(settings.telegram_bot_token), 'telegram_username': settings.telegram_bot_username or None}
 
 
 @router.post('/scan/text', response_model=Assessment)

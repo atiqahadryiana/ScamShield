@@ -11,7 +11,7 @@ from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException
 from app.api.routes import router
 from app.core.config import get_settings
-from app.core.database import SessionLocal
+from app.core.database import Base, EPHEMERAL_DATABASE, SessionLocal, engine
 from app.core.security import RateLimiter
 from app.services.seed import seed
 from app.services.storage import cleanup
@@ -44,6 +44,11 @@ def same_origin(request: Request, origin: str) -> bool:
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    if EPHEMERAL_DATABASE:
+        # /tmp is instance-local and can disappear between invocations. This is
+        # a graceful demo fallback, not a replacement for managed PostgreSQL.
+        Base.metadata.create_all(engine)
+        logger.warning(json.dumps({'event': 'ephemeral_database', 'message': 'DATABASE_URL is not configured; using non-durable Vercel scratch storage.'}))
     with SessionLocal() as db:
         seed(db)
         cleanup(db)

@@ -18,6 +18,13 @@ durable serverless storage. Apply Alembic migrations to that database from a
 trusted administrative environment before serving traffic. Do not set
 `VITE_API_BASE_URL`; the frontend should use the shared deployment origin.
 
+If `DATABASE_URL` is absent, the API starts with an explicitly non-durable
+SQLite database in Vercel's writable `/tmp` scratch directory. This keeps guest
+scanning and educational content available for demos, but accounts, history,
+metrics, and administrative changes can disappear whenever the function
+instance is recycled. The health response reports `"storage":"ephemeral"` in
+this mode. Configure and migrate PostgreSQL before relying on persistence.
+
 OCR requires a Tesseract executable and language packs. The standard Vercel
 Python function does not install the repository's Docker image packages, so OCR
 will return its documented 503 fallback unless the backend is changed to a
