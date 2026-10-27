@@ -21,6 +21,8 @@ class Settings(BaseSettings):
     ml_message_report: str = ''
     ml_url_artifact: str = ''
     ml_url_report: str = ''
+    phishtank_app_key: str = ''
+    phishtank_user_agent: str = 'phishtank/scamshield-ai'
 
 
 @lru_cache

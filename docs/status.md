@@ -17,7 +17,7 @@
 | Administrator role/content/notices/audits | Implemented; English lesson editing; no default credentials |
 | Database models and Alembic migration | Implemented; SQLite tested; PostgreSQL support/compose supplied but not run here |
 | ML training/evaluation and safe inference loader | Candidate preparation implemented; no approved dataset, trained model or active model probability |
-| Threat intelligence / remote redirect inspection | Not configured; no fake results |
+| Threat intelligence / remote redirect inspection | Optional PhishTank exact-URL lookup; redirect inspection remains disabled |
 | Official Malaysian resources | Verified website links; no invented agency APIs |
 | SDG/business model pages | Implemented; goals distinct from installation measurements; institutional tier proposed |
 | HTTPS/Docker/production deployment configuration | Supplied and documented; Docker unavailable here; no remote deployment claimed |

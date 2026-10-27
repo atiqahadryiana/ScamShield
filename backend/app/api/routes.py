@@ -16,6 +16,7 @@ from app.services.detection import assess_text, assess_url
 from app.services.ocr import extract_text, OCRUnavailable, MAX_BYTES
 from app.services.resources import RESOURCES
 from app.services.storage import record_metric
+from app.services.threat_intelligence import check_phishtank
 from app.ml.runtime import get_runtime
 
 router = APIRouter(prefix='/api/v1')
@@ -40,7 +41,7 @@ def health(db: DB):
     db.execute(select(1))
     settings = get_settings()
     ml = get_runtime().status()
-    return {'status': 'ok', 'engine': 'explainable-rules-v1' if set(ml.values()) == {'rules_only'} else 'validated-ml-with-rule-explanations-v1', 'ml_status': ml, 'storage': 'ephemeral' if EPHEMERAL_DATABASE else 'persistent', 'ocr_available': bool(shutil.which(settings.tesseract_cmd or 'tesseract')), 'telegram_configured': bool(settings.telegram_bot_token), 'telegram_username': settings.telegram_bot_username or None}
+    return {'status': 'ok', 'engine': 'explainable-rules-v1' if set(ml.values()) == {'rules_only'} else 'validated-ml-with-rule-explanations-v1', 'ml_status': ml, 'storage': 'ephemeral' if EPHEMERAL_DATABASE else 'persistent', 'ocr_available': bool(shutil.which(settings.tesseract_cmd or 'tesseract')), 'phishtank_configured': bool(settings.phishtank_app_key), 'telegram_configured': bool(settings.telegram_bot_token), 'telegram_username': settings.telegram_bot_username or None}
 
 
 @router.post('/scan/text', response_model=Assessment)
@@ -54,6 +55,8 @@ def scan_url(body: URLInput, db: DB, user: OptionalUser):
         assessment = assess_url(body.url)
     except ValueError as exc:
         raise HTTPException(422, str(exc)) from None
+    settings = get_settings()
+    assessment = check_phishtank(assessment, body.url, settings.phishtank_app_key, settings.phishtank_user_agent)
     return store(db, assessment, body.url, body.save_history, user)
 
 

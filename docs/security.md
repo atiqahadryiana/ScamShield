@@ -2,7 +2,7 @@
 
 Implemented controls:
 
-- No outbound HTTP or DNS requests for submitted URLs. Only lexical analysis. Future remote inspection requires a separate isolated scanner/allowlisted provider and SSRF review.
+- URL checks never open the submitted destination, resolve it, or follow its redirects. When explicitly configured, the backend sends the exact URL as form data only to the fixed HTTPS PhishTank API endpoint for a reputation lookup, with a four-second timeout and redirects disabled.
 - Pydantic input lengths, HTTP(S)-only URLs, domain/IP/IDNA checks. React escapes submitted text; no raw HTML rendering.
 - Request-body limits including chunked uploads before multipart parsing, real image decoding, byte/pixel limits, two OCR slots/process, timeout, rebuilt pixels without metadata, temporary file closure.
 - Argon2 hashes, dummy hash verification for unknown accounts, random session tokens, hashed server-side tokens, eight-hour expiry, logout revocation, HttpOnly/SameSite=strict cookies. Production enables Secure cookies and HSTS.
@@ -11,7 +11,7 @@ Implemented controls:
 - Bounded in-memory rate limits with salted keys, no saved raw identity. Structured request logs contain route template/status/duration, excluding request content, cookies, tokens, query strings and IPs. Telegram HTTP logging is suppressed to avoid token URLs.
 - Parameterized ORM queries, referential integrity, deletion cascades, atomic aggregate upserts.
 - Guest non-retention, opt-in private history, 30-day expiry, startup cleanup and scheduled daily cleanup command. Anonymous aggregates remain. Active SQLite deletion uses secure_delete.
-- Environment secrets only; private database/environment/model files are ignored. No third-party AI processing.
+- Environment secrets only; private database/environment/model files are ignored. No third-party AI processing. PhishTank receives website-checker URLs only when its integration is configured; the UI and privacy notice disclose this transfer.
 
 Production responsibilities: deploy HTTPS, protect database/application ports, restrict operator access, encrypt storage/backups, expire backups, schedule daily cleanup, and configure proxy logs to exclude sensitive data. Deletion cannot erase backups or OS snapshots outside the active database.
 
