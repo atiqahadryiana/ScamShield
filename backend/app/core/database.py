@@ -16,6 +16,13 @@ configured_url = os.getenv('DATABASE_URL', '').strip()
 # non-durable SQLite database in the function's writable scratch directory.
 EPHEMERAL_DATABASE = os.getenv('VERCEL') == '1' and not configured_url
 url = f"sqlite:///{os.path.join(tempfile.gettempdir(), 'scamshield.db')}" if EPHEMERAL_DATABASE else get_settings().database_url
+# Marketplace providers commonly supply SQLAlchemy's generic PostgreSQL URL.
+# This project installs Psycopg 3, so select that driver explicitly instead of
+# letting SQLAlchemy look for the older, uninstalled psycopg2 package.
+if url.startswith('postgresql://'):
+    url = 'postgresql+psycopg://' + url.removeprefix('postgresql://')
+elif url.startswith('postgres://'):
+    url = 'postgresql+psycopg://' + url.removeprefix('postgres://')
 engine = create_engine(url, connect_args={'check_same_thread': False} if url.startswith('sqlite') else {}, pool_pre_ping=True)
 if url.startswith('sqlite'):
     @event.listens_for(engine, 'connect')
