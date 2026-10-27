@@ -42,6 +42,14 @@ def test_invalid_urls(url):
         analyze_url(url)
 
 
+def test_shortened_phishing_link_is_not_reported_as_low_risk():
+    result = analyze_url('https://zpr.io/tsSe5va7Sbz3')
+    assert result.category == 'phishing'
+    assert result.risk == 'MEDIUM'
+    assert result.score == 30
+    assert {indicator.id for indicator in result.indicators} == {'shortener'}
+
+
 def test_no_network(monkeypatch):
     def fail(*args, **kwargs):
         raise AssertionError('URL scanner must never access the network')

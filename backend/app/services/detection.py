@@ -105,8 +105,8 @@ def analyze_url(raw: str) -> Assessment:
     brands = {'maybank': 'maybank2u.com.my', 'cimb': 'cimb.com.my', 'bnm': 'bnm.gov.my', 'lhdn': 'hasil.gov.my', 'paypal': 'paypal.com'}
     if any(brand in ascii_host and not (ascii_host == official or ascii_host.endswith('.' + official)) for brand, official in brands.items()):
         add('brand_domain', 35, 'Brand name on an unrelated domain', 'Nama jenama pada domain lain', 'A familiar brand appears in a domain outside its recognized official domain. Check independently; this is a heuristic.')
-    if ascii_host in {'bit.ly', 'tinyurl.com', 't.co', 'shorturl.at'}:
-        add('shortener', 20, 'Shortened link conceals destination', 'Pautan pendek menyembunyikan destinasi', 'This scanner does not follow redirects. Verify the destination with the sender independently.')
+    if ascii_host in {'bit.ly', 'tinyurl.com', 't.co', 'shorturl.at', 'zpr.io'}:
+        add('shortener', 30, 'Shortened link conceals destination', 'Pautan pendek menyembunyikan destinasi', 'The visible address hides the final website. This scanner does not follow redirects, so treat the link as suspicious and verify its destination independently.')
     if re.search(r'(redirect|returnurl|next|url|continue)=https?%?[:3]', unquote(parsed.query), re.I):
         add('redirect_parameter', 20, 'Possible redirect parameter', 'Parameter pengalihan mungkin', 'A query parameter contains another URL; no redirect has been followed or verified.')
     return result(flags, 'und', 'phishing', ascii_host)
