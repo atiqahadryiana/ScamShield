@@ -1,0 +1,19 @@
+{
+  "name": "uci_sms_spam",
+  "task": "text_classification",
+  "source": "Almeida & Hidalgo, SMS Spam Collection",
+  "doi": "10.24432/C5CC84",
+  "license": "CC BY 4.0",
+  "download_date": "2026-10-27",
+  "raw_rows": 5574,
+  "processed_rows": 5159,
+  "excluded_conflicting_normalized_texts": 0,
+  "class_distribution": {
+    "ham": 4517,
+    "spam": 642
+  },
+  "processed_sha256": "da4376bf7ce13888e331f331aaf44d51ed8c300e19f71377b99814bd70597a29",
+  "processed_file": "uci_sms_spam.csv",
+  "permission_basis": "Public dataset released under CC BY 4.0; attribution required.",
+  "labeling_method": "Labels supplied by dataset authors; conflicting exact normalized duplicates excluded."
+}

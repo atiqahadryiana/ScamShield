@@ -1,0 +1,9 @@
+{
+  "scope": "1000 sequential fictional text + URL analysis pairs; excludes HTTP, OCR, database, Telegram and ML",
+  "python": "3.14.2",
+  "platform": "Windows",
+  "mean_ms_per_pair": 0.16796960000647232,
+  "p95_ms_per_pair": 0.28790000033040997,
+  "iterations": 1000,
+  "synthetic_inputs": true
+}

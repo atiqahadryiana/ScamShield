@@ -1,0 +1,165 @@
+{
+  "validated": false,
+  "model_kind": "dataset_specific_text",
+  "status": "research_candidate_not_for_runtime",
+  "dataset_provenance": {
+    "name": "uci_sms_spam",
+    "task": "text_classification",
+    "source": "Almeida & Hidalgo, SMS Spam Collection",
+    "doi": "10.24432/C5CC84",
+    "license": "CC BY 4.0",
+    "download_date": "2026-10-27",
+    "raw_rows": 5574,
+    "processed_rows": 5159,
+    "excluded_conflicting_normalized_texts": 0,
+    "class_distribution": {
+      "ham": 4517,
+      "spam": 642
+    },
+    "processed_sha256": "da4376bf7ce13888e331f331aaf44d51ed8c300e19f71377b99814bd70597a29",
+    "processed_file": "uci_sms_spam.csv",
+    "permission_basis": "Public dataset released under CC BY 4.0; attribution required.",
+    "labeling_method": "Labels supplied by dataset authors; conflicting exact normalized duplicates excluded."
+  },
+  "dataset_sha256": "da4376bf7ce13888e331f331aaf44d51ed8c300e19f71377b99814bd70597a29",
+  "unique_rows": 5159,
+  "class_distribution": {
+    "ham": 4517,
+    "spam": 642
+  },
+  "training_rows": 4127,
+  "heldout_rows": 1032,
+  "labels": [
+    "ham",
+    "spam"
+  ],
+  "experiments": {
+    "word_naive_bayes": {
+      "macro_precision": 0.9798301486199575,
+      "macro_recall": 0.8515625,
+      "macro_f1": 0.9025515123202164,
+      "classes": {
+        "ham": {
+          "precision": 0.9596602972399151,
+          "recall": 1.0,
+          "f1": 0.9794149512459371,
+          "support": 904
+        },
+        "spam": {
+          "precision": 1.0,
+          "recall": 0.703125,
+          "f1": 0.8256880733944955,
+          "support": 128
+        }
+      },
+      "confusion_matrix": [
+        [
+          904,
+          0
+        ],
+        [
+          38,
+          90
+        ]
+      ],
+      "mean_batch_latency_ms_per_message": 0.03527034870023991
+    },
+    "word_character_logistic": {
+      "macro_precision": 0.9762955955008935,
+      "macro_recall": 0.9698907632743363,
+      "macro_f1": 0.9730630356288337,
+      "classes": {
+        "ham": {
+          "precision": 0.9922737306843267,
+          "recall": 0.9944690265486725,
+          "f1": 0.9933701657458563,
+          "support": 904
+        },
+        "spam": {
+          "precision": 0.9603174603174603,
+          "recall": 0.9453125,
+          "f1": 0.952755905511811,
+          "support": 128
+        }
+      },
+      "confusion_matrix": [
+        [
+          899,
+          5
+        ],
+        [
+          7,
+          121
+        ]
+      ],
+      "mean_batch_latency_ms_per_message": 0.20312238371815503
+    },
+    "word_character_linear_svm": {
+      "macro_precision": 0.9867959104063286,
+      "macro_recall": 0.9637375553097345,
+      "macro_f1": 0.9748813435560424,
+      "classes": {
+        "ham": {
+          "precision": 0.9901207464324918,
+          "recall": 0.9977876106194691,
+          "f1": 0.9939393939393939,
+          "support": 904
+        },
+        "spam": {
+          "precision": 0.9834710743801653,
+          "recall": 0.9296875,
+          "f1": 0.9558232931726908,
+          "support": 128
+        }
+      },
+      "confusion_matrix": [
+        [
+          902,
+          2
+        ],
+        [
+          9,
+          119
+        ]
+      ],
+      "mean_batch_latency_ms_per_message": 0.20014011646736443
+    }
+  },
+  "selected_model": "word_character_linear_svm",
+  "model_metrics": {
+    "macro_precision": 0.9867959104063286,
+    "macro_recall": 0.9637375553097345,
+    "macro_f1": 0.9748813435560424,
+    "classes": {
+      "ham": {
+        "precision": 0.9901207464324918,
+        "recall": 0.9977876106194691,
+        "f1": 0.9939393939393939,
+        "support": 904
+      },
+      "spam": {
+        "precision": 0.9834710743801653,
+        "recall": 0.9296875,
+        "f1": 0.9558232931726908,
+        "support": 128
+      }
+    },
+    "confusion_matrix": [
+      [
+        902,
+        2
+      ],
+      [
+        9,
+        119
+      ]
+    ],
+    "mean_batch_latency_ms_per_message": 0.20014011646736443
+  },
+  "limitations": [
+    "Random stratified splitting does not prevent campaign or source leakage.",
+    "Dataset-specific labels are not interchangeable.",
+    "This artifact is not approved for live runtime activation."
+  ],
+  "model_sha256": "74a1907b7df61252ce11b8c0cf9ed7220a9f486be7775ba5688e28d77a3eb454"
+}

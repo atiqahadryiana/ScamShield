@@ -1,0 +1,103 @@
+{
+  "datasets": [
+    {
+      "name": "sms_phishing",
+      "task": "text_classification",
+      "source": "Mishra & Soni, SMS PHISHING DATASET FOR MACHINE LEARNING AND PATTERN RECOGNITION, version 1",
+      "doi": "10.17632/f45bkkt8pr.1",
+      "license": "CC BY 4.0",
+      "download_date": "2026-10-27",
+      "raw_rows": 5971,
+      "processed_rows": 5797,
+      "excluded_conflicting_normalized_texts": 34,
+      "class_distribution": {
+        "ham": 4834,
+        "smishing": 528,
+        "spam": 435
+      },
+      "processed_sha256": "e1d918e2d714cd163115185c043a00e248b25becb1ad9a54c5f8ef356617ec30",
+      "processed_file": "sms_phishing.csv",
+      "permission_basis": "Public dataset released under CC BY 4.0; attribution required.",
+      "labeling_method": "Labels supplied by dataset authors; conflicting exact normalized duplicates excluded."
+    },
+    {
+      "name": "balanced_spam_smishing",
+      "task": "text_classification",
+      "source": "Munoz & Islam, A Balanced Dataset for Spam and Smishing Detection using LLMs, version 1",
+      "doi": "10.17632/vmg875v4xs.1",
+      "license": "CC BY 4.0",
+      "download_date": "2026-10-27",
+      "raw_rows": 10191,
+      "processed_rows": 7376,
+      "excluded_conflicting_normalized_texts": 35,
+      "class_distribution": {
+        "ham": 3393,
+        "smishing": 2331,
+        "spam": 1652
+      },
+      "processed_sha256": "fb2ab785a94e5e6ef9cd2ba7f0f1c09027b10ef0da917c29a387c2c13cd2ee8c",
+      "processed_file": "balanced_spam_smishing.csv",
+      "permission_basis": "Public dataset released under CC BY 4.0; attribution required.",
+      "labeling_method": "Labels supplied by dataset authors; conflicting exact normalized duplicates excluded."
+    },
+    {
+      "name": "uci_sms_spam",
+      "task": "text_classification",
+      "source": "Almeida & Hidalgo, SMS Spam Collection",
+      "doi": "10.24432/C5CC84",
+      "license": "CC BY 4.0",
+      "download_date": "2026-10-27",
+      "raw_rows": 5574,
+      "processed_rows": 5159,
+      "excluded_conflicting_normalized_texts": 0,
+      "class_distribution": {
+        "ham": 4517,
+        "spam": 642
+      },
+      "processed_sha256": "da4376bf7ce13888e331f331aaf44d51ed8c300e19f71377b99814bd70597a29",
+      "processed_file": "uci_sms_spam.csv",
+      "permission_basis": "Public dataset released under CC BY 4.0; attribution required.",
+      "labeling_method": "Labels supplied by dataset authors; conflicting exact normalized duplicates excluded."
+    },
+    {
+      "name": "financial_scams",
+      "task": "text_classification",
+      "source": "Ahmed & Islam, Financial scams detection dataset, version 2",
+      "doi": "10.17632/znsk27yk3h.2",
+      "license": "CC BY 4.0",
+      "download_date": "2026-10-27",
+      "raw_rows": 523,
+      "processed_rows": 519,
+      "excluded_conflicting_normalized_texts": 0,
+      "class_distribution": {
+        "scam": 309,
+        "ham": 210
+      },
+      "processed_sha256": "770c9274461e6373abf37863df24725eb960164081f0f8c9fa5a482978dc7ab4",
+      "processed_file": "financial_scams.csv",
+      "permission_basis": "Public dataset released under CC BY 4.0; attribution required.",
+      "labeling_method": "Labels supplied by dataset authors; conflicting exact normalized duplicates excluded."
+    },
+    {
+      "name": "legitphish",
+      "task": "url_classification",
+      "source": "Potpelwar, Kulkarni & Waghmare, LegitPhish Dataset, version 2",
+      "doi": "10.17632/hx4m73v2sf.2",
+      "license": "CC BY 4.0",
+      "download_date": "2026-10-27",
+      "raw_rows": 101219,
+      "processed_rows": 100818,
+      "excluded_unlabeled_rows": 1,
+      "excluded_malformed_urls": 54,
+      "excluded_conflicting_urls": 0,
+      "class_distribution": {
+        "1": 63438,
+        "0": 37380
+      },
+      "processed_sha256": "ec389db0f48859bb40a6ddb9c2d188e5ecd4ac32c97d908854cfb75072765030",
+      "processed_file": "legitphish.csv",
+      "permission_basis": "Public dataset released under CC BY 4.0; attribution required.",
+      "labeling_method": "Labels supplied by dataset authors; source labels inverted to 0 legitimate / 1 phishing."
+    }
+  ]
+}

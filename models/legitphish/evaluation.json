@@ -1,0 +1,115 @@
+{
+  "validated": false,
+  "model_kind": "url",
+  "status": "candidate_requires_independent_review",
+  "dataset_provenance": {
+    "name": "legitphish",
+    "task": "url_classification",
+    "source": "Potpelwar, Kulkarni & Waghmare, LegitPhish Dataset, version 2",
+    "doi": "10.17632/hx4m73v2sf.2",
+    "license": "CC BY 4.0",
+    "download_date": "2026-10-27",
+    "raw_rows": 101219,
+    "processed_rows": 100818,
+    "excluded_unlabeled_rows": 1,
+    "excluded_malformed_urls": 54,
+    "excluded_conflicting_urls": 0,
+    "class_distribution": {
+      "1": 63438,
+      "0": 37380
+    },
+    "processed_sha256": "ec389db0f48859bb40a6ddb9c2d188e5ecd4ac32c97d908854cfb75072765030",
+    "processed_file": "legitphish.csv",
+    "permission_basis": "Public dataset released under CC BY 4.0; attribution required.",
+    "labeling_method": "Labels supplied by dataset authors; source labels inverted to 0 legitimate / 1 phishing."
+  },
+  "dataset_sha256": "ec389db0f48859bb40a6ddb9c2d188e5ecd4ac32c97d908854cfb75072765030",
+  "unique_rows": 100818,
+  "training_rows": 80654,
+  "heldout_rows": 20164,
+  "feature_names": [
+    "url_length",
+    "host_length",
+    "path_length",
+    "query_length",
+    "dot_count",
+    "subdomain_count",
+    "digit_ratio",
+    "special_count",
+    "hyphen_count",
+    "at_count",
+    "percent_count",
+    "uses_http",
+    "host_is_ip",
+    "has_punycode",
+    "suspicious_word_count",
+    "entropy"
+  ],
+  "experiments": {
+    "logistic_regression": {
+      "precision": 0.9982554912378082,
+      "recall": 0.9921973518284993,
+      "f1": 0.9952172022609589,
+      "confusion_matrix": [
+        [
+          7454,
+          22
+        ],
+        [
+          99,
+          12589
+        ]
+      ],
+      "false_positive_rate": 0.0029427501337613697,
+      "false_negative_rate": 0.00780264817150063,
+      "brier_score": 0.004831521237414005,
+      "mean_batch_latency_ms_per_url": 0.002532711765619704
+    },
+    "random_forest": {
+      "precision": 0.9984255687632843,
+      "recall": 0.9996059268600253,
+      "f1": 0.9990153991571816,
+      "confusion_matrix": [
+        [
+          7456,
+          20
+        ],
+        [
+          5,
+          12683
+        ]
+      ],
+      "false_positive_rate": 0.002675227394328518,
+      "false_negative_rate": 0.0003940731399747793,
+      "brier_score": 0.0009816639170452809,
+      "mean_batch_latency_ms_per_url": 0.012444787742073067
+    }
+  },
+  "selected_model": "random_forest",
+  "model_metrics": {
+    "precision": 0.9984255687632843,
+    "recall": 0.9996059268600253,
+    "f1": 0.9990153991571816,
+    "confusion_matrix": [
+      [
+        7456,
+        20
+      ],
+      [
+        5,
+        12683
+      ]
+    ],
+    "false_positive_rate": 0.002675227394328518,
+    "false_negative_rate": 0.0003940731399747793,
+    "brier_score": 0.0009816639170452809,
+    "mean_batch_latency_ms_per_url": 0.012444787742073067
+  },
+  "threshold_policy": null,
+  "limitations": [
+    "Lexical features do not establish whether a site is malicious.",
+    "No URL is fetched, resolved, or checked against live threat intelligence.",
+    "Use a domain/campaign-grouped external test before deployment."
+  ],
+  "model_sha256": "cea96282882a480ef2982e53204de9c0a400adb770f3a9185c97a32e384ce0ec"
+}

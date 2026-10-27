@@ -1,0 +1,10 @@
+{
+  "synthetic": true,
+  "purpose": "Fictional demonstration inputs, never a validation dataset",
+  "messages": [
+    {"language":"en","text":"Congratulations! You have been selected for a part-time job earning RM500 daily. Pay RM50 registration fee immediately to secure your position."},
+    {"language":"ms","text":"Anda telah memenangi hadiah RM10,000! Klik pautan ini dan bayar RM100 untuk menuntut hadiah."},
+    {"language":"en","text":"Hello, our project meeting is at 10 today."}
+  ],
+  "urls": ["https://example.com/", "http://127.0.0.1/login", "https://maybank.verify.example.com/login"]
+}

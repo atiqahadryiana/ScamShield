@@ -1,0 +1,21 @@
+{
+  "name": "legitphish",
+  "task": "url_classification",
+  "source": "Potpelwar, Kulkarni & Waghmare, LegitPhish Dataset, version 2",
+  "doi": "10.17632/hx4m73v2sf.2",
+  "license": "CC BY 4.0",
+  "download_date": "2026-10-27",
+  "raw_rows": 101219,
+  "processed_rows": 100818,
+  "excluded_unlabeled_rows": 1,
+  "excluded_malformed_urls": 54,
+  "excluded_conflicting_urls": 0,
+  "class_distribution": {
+    "1": 63438,
+    "0": 37380
+  },
+  "processed_sha256": "ec389db0f48859bb40a6ddb9c2d188e5ecd4ac32c97d908854cfb75072765030",
+  "processed_file": "legitphish.csv",
+  "permission_basis": "Public dataset released under CC BY 4.0; attribution required.",
+  "labeling_method": "Labels supplied by dataset authors; source labels inverted to 0 legitimate / 1 phishing."
+}

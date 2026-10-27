@@ -1,0 +1,20 @@
+{
+  "name": "sms_phishing",
+  "task": "text_classification",
+  "source": "Mishra & Soni, SMS PHISHING DATASET FOR MACHINE LEARNING AND PATTERN RECOGNITION, version 1",
+  "doi": "10.17632/f45bkkt8pr.1",
+  "license": "CC BY 4.0",
+  "download_date": "2026-10-27",
+  "raw_rows": 5971,
+  "processed_rows": 5797,
+  "excluded_conflicting_normalized_texts": 34,
+  "class_distribution": {
+    "ham": 4834,
+    "smishing": 528,
+    "spam": 435
+  },
+  "processed_sha256": "e1d918e2d714cd163115185c043a00e248b25becb1ad9a54c5f8ef356617ec30",
+  "processed_file": "sms_phishing.csv",
+  "permission_basis": "Public dataset released under CC BY 4.0; attribution required.",
+  "labeling_method": "Labels supplied by dataset authors; conflicting exact normalized duplicates excluded."
+}

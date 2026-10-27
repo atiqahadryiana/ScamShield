@@ -1,0 +1,220 @@
+{
+  "validated": false,
+  "model_kind": "dataset_specific_text",
+  "status": "research_candidate_not_for_runtime",
+  "dataset_provenance": {
+    "name": "sms_phishing",
+    "task": "text_classification",
+    "source": "Mishra & Soni, SMS PHISHING DATASET FOR MACHINE LEARNING AND PATTERN RECOGNITION, version 1",
+    "doi": "10.17632/f45bkkt8pr.1",
+    "license": "CC BY 4.0",
+    "download_date": "2026-10-27",
+    "raw_rows": 5971,
+    "processed_rows": 5797,
+    "excluded_conflicting_normalized_texts": 34,
+    "class_distribution": {
+      "ham": 4834,
+      "smishing": 528,
+      "spam": 435
+    },
+    "processed_sha256": "e1d918e2d714cd163115185c043a00e248b25becb1ad9a54c5f8ef356617ec30",
+    "processed_file": "sms_phishing.csv",
+    "permission_basis": "Public dataset released under CC BY 4.0; attribution required.",
+    "labeling_method": "Labels supplied by dataset authors; conflicting exact normalized duplicates excluded."
+  },
+  "dataset_sha256": "e1d918e2d714cd163115185c043a00e248b25becb1ad9a54c5f8ef356617ec30",
+  "unique_rows": 5797,
+  "class_distribution": {
+    "ham": 4834,
+    "smishing": 528,
+    "spam": 435
+  },
+  "training_rows": 4637,
+  "heldout_rows": 1160,
+  "labels": [
+    "ham",
+    "smishing",
+    "spam"
+  ],
+  "experiments": {
+    "word_naive_bayes": {
+      "macro_precision": 0.9321551331900452,
+      "macro_recall": 0.6834381551362684,
+      "macro_f1": 0.7547203790538304,
+      "classes": {
+        "ham": {
+          "precision": 0.9227099236641222,
+          "recall": 1.0,
+          "f1": 0.9598014888337469,
+          "support": 967
+        },
+        "smishing": {
+          "precision": 0.9382716049382716,
+          "recall": 0.7169811320754716,
+          "f1": 0.8128342245989305,
+          "support": 106
+        },
+        "spam": {
+          "precision": 0.9354838709677419,
+          "recall": 0.3333333333333333,
+          "f1": 0.4915254237288136,
+          "support": 87
+        }
+      },
+      "confusion_matrix": [
+        [
+          967,
+          0,
+          0
+        ],
+        [
+          28,
+          76,
+          2
+        ],
+        [
+          53,
+          5,
+          29
+        ]
+      ],
+      "mean_batch_latency_ms_per_message": 0.040836637871789525
+    },
+    "word_character_logistic": {
+      "macro_precision": 0.9314768835044691,
+      "macro_recall": 0.8884357438198944,
+      "macro_f1": 0.908741715037409,
+      "classes": {
+        "ham": {
+          "precision": 0.9837067209775967,
+          "recall": 0.9989658738366081,
+          "f1": 0.991277578245254,
+          "support": 967
+        },
+        "smishing": {
+          "precision": 0.9405940594059405,
+          "recall": 0.8962264150943396,
+          "f1": 0.9178743961352657,
+          "support": 106
+        },
+        "spam": {
+          "precision": 0.8701298701298701,
+          "recall": 0.7701149425287356,
+          "f1": 0.8170731707317073,
+          "support": 87
+        }
+      },
+      "confusion_matrix": [
+        [
+          966,
+          1,
+          0
+        ],
+        [
+          1,
+          95,
+          10
+        ],
+        [
+          15,
+          5,
+          67
+        ]
+      ],
+      "mean_batch_latency_ms_per_message": 0.2173037069512467
+    },
+    "word_character_linear_svm": {
+      "macro_precision": 0.9321622847293524,
+      "macro_recall": 0.8720812549699993,
+      "macro_f1": 0.8985417971088391,
+      "classes": {
+        "ham": {
+          "precision": 0.9797365754812564,
+          "recall": 1.0,
+          "f1": 0.9897645854657113,
+          "support": 967
+        },
+        "smishing": {
+          "precision": 0.9326923076923077,
+          "recall": 0.9150943396226415,
+          "f1": 0.9238095238095239,
+          "support": 106
+        },
+        "spam": {
+          "precision": 0.8840579710144928,
+          "recall": 0.7011494252873564,
+          "f1": 0.782051282051282,
+          "support": 87
+        }
+      },
+      "confusion_matrix": [
+        [
+          967,
+          0,
+          0
+        ],
+        [
+          1,
+          97,
+          8
+        ],
+        [
+          19,
+          7,
+          61
+        ]
+      ],
+      "mean_batch_latency_ms_per_message": 0.16286948270260773
+    }
+  },
+  "selected_model": "word_character_logistic",
+  "model_metrics": {
+    "macro_precision": 0.9314768835044691,
+    "macro_recall": 0.8884357438198944,
+    "macro_f1": 0.908741715037409,
+    "classes": {
+      "ham": {
+        "precision": 0.9837067209775967,
+        "recall": 0.9989658738366081,
+        "f1": 0.991277578245254,
+        "support": 967
+      },
+      "smishing": {
+        "precision": 0.9405940594059405,
+        "recall": 0.8962264150943396,
+        "f1": 0.9178743961352657,
+        "support": 106
+      },
+      "spam": {
+        "precision": 0.8701298701298701,
+        "recall": 0.7701149425287356,
+        "f1": 0.8170731707317073,
+        "support": 87
+      }
+    },
+    "confusion_matrix": [
+      [
+        966,
+        1,
+        0
+      ],
+      [
+        1,
+        95,
+        10
+      ],
+      [
+        15,
+        5,
+        67
+      ]
+    ],
+    "mean_batch_latency_ms_per_message": 0.2173037069512467
+  },
+  "limitations": [
+    "Random stratified splitting does not prevent campaign or source leakage.",
+    "Dataset-specific labels are not interchangeable.",
+    "This artifact is not approved for live runtime activation."
+  ],
+  "model_sha256": "3e5e8244dae6b14d2a58af93cfa0398e2501b161000dc39cee7fe294a81bd352"
+}

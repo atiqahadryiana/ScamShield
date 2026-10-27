@@ -1,0 +1,165 @@
+{
+  "validated": false,
+  "model_kind": "dataset_specific_text",
+  "status": "research_candidate_not_for_runtime",
+  "dataset_provenance": {
+    "name": "financial_scams",
+    "task": "text_classification",
+    "source": "Ahmed & Islam, Financial scams detection dataset, version 2",
+    "doi": "10.17632/znsk27yk3h.2",
+    "license": "CC BY 4.0",
+    "download_date": "2026-10-27",
+    "raw_rows": 523,
+    "processed_rows": 519,
+    "excluded_conflicting_normalized_texts": 0,
+    "class_distribution": {
+      "scam": 309,
+      "ham": 210
+    },
+    "processed_sha256": "770c9274461e6373abf37863df24725eb960164081f0f8c9fa5a482978dc7ab4",
+    "processed_file": "financial_scams.csv",
+    "permission_basis": "Public dataset released under CC BY 4.0; attribution required.",
+    "labeling_method": "Labels supplied by dataset authors; conflicting exact normalized duplicates excluded."
+  },
+  "dataset_sha256": "770c9274461e6373abf37863df24725eb960164081f0f8c9fa5a482978dc7ab4",
+  "unique_rows": 519,
+  "class_distribution": {
+    "scam": 309,
+    "ham": 210
+  },
+  "training_rows": 415,
+  "heldout_rows": 104,
+  "labels": [
+    "ham",
+    "scam"
+  ],
+  "experiments": {
+    "word_naive_bayes": {
+      "macro_precision": 0.8991596638655461,
+      "macro_recall": 0.8648233486943164,
+      "macro_f1": 0.8755980861244019,
+      "classes": {
+        "ham": {
+          "precision": 0.9411764705882353,
+          "recall": 0.7619047619047619,
+          "f1": 0.8421052631578947,
+          "support": 42
+        },
+        "scam": {
+          "precision": 0.8571428571428571,
+          "recall": 0.967741935483871,
+          "f1": 0.9090909090909091,
+          "support": 62
+        }
+      },
+      "confusion_matrix": [
+        [
+          32,
+          10
+        ],
+        [
+          2,
+          60
+        ]
+      ],
+      "mean_batch_latency_ms_per_message": 0.04421634590611435
+    },
+    "word_character_logistic": {
+      "macro_precision": 0.9207341670028237,
+      "macro_recall": 0.9005376344086022,
+      "macro_f1": 0.9081542537533117,
+      "classes": {
+        "ham": {
+          "precision": 0.9459459459459459,
+          "recall": 0.8333333333333334,
+          "f1": 0.8860759493670886,
+          "support": 42
+        },
+        "scam": {
+          "precision": 0.8955223880597015,
+          "recall": 0.967741935483871,
+          "f1": 0.9302325581395349,
+          "support": 62
+        }
+      },
+      "confusion_matrix": [
+        [
+          35,
+          7
+        ],
+        [
+          2,
+          60
+        ]
+      ],
+      "mean_batch_latency_ms_per_message": 0.1599192305897864
+    },
+    "word_character_linear_svm": {
+      "macro_precision": 0.899757966922146,
+      "macro_recall": 0.880568356374808,
+      "macro_f1": 0.8877440879207144,
+      "classes": {
+        "ham": {
+          "precision": 0.918918918918919,
+          "recall": 0.8095238095238095,
+          "f1": 0.8607594936708861,
+          "support": 42
+        },
+        "scam": {
+          "precision": 0.8805970149253731,
+          "recall": 0.9516129032258065,
+          "f1": 0.9147286821705426,
+          "support": 62
+        }
+      },
+      "confusion_matrix": [
+        [
+          34,
+          8
+        ],
+        [
+          3,
+          59
+        ]
+      ],
+      "mean_batch_latency_ms_per_message": 0.1549067316003717
+    }
+  },
+  "selected_model": "word_character_logistic",
+  "model_metrics": {
+    "macro_precision": 0.9207341670028237,
+    "macro_recall": 0.9005376344086022,
+    "macro_f1": 0.9081542537533117,
+    "classes": {
+      "ham": {
+        "precision": 0.9459459459459459,
+        "recall": 0.8333333333333334,
+        "f1": 0.8860759493670886,
+        "support": 42
+      },
+      "scam": {
+        "precision": 0.8955223880597015,
+        "recall": 0.967741935483871,
+        "f1": 0.9302325581395349,
+        "support": 62
+      }
+    },
+    "confusion_matrix": [
+      [
+        35,
+        7
+      ],
+      [
+        2,
+        60
+      ]
+    ],
+    "mean_batch_latency_ms_per_message": 0.1599192305897864
+  },
+  "limitations": [
+    "Random stratified splitting does not prevent campaign or source leakage.",
+    "Dataset-specific labels are not interchangeable.",
+    "This artifact is not approved for live runtime activation."
+  ],
+  "model_sha256": "f81560c54fc24d5afdc26959c4d83d25b76bb3f37fae8088e71bd27e5784d550"
+}

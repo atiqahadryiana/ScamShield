@@ -1,0 +1,61 @@
+services:
+  backend:
+    build: ./backend
+    environment:
+      DATABASE_URL: sqlite:////data/scamshield.db
+      ENVIRONMENT: ${ENVIRONMENT:-development}
+      CORS_ORIGINS: ${DOCKER_CORS_ORIGINS:-http://localhost:8080,http://127.0.0.1:8080}
+      TELEGRAM_BOT_USERNAME: ${TELEGRAM_BOT_USERNAME:-}
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      OCR_LANGUAGES: eng+msa
+      HISTORY_RETENTION_DAYS: ${HISTORY_RETENTION_DAYS:-30}
+    volumes:
+      - data:/data
+    ports:
+      - "127.0.0.1:8000:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health', timeout=5)"]
+      interval: 10s
+      timeout: 6s
+      retries: 10
+    restart: unless-stopped
+  frontend:
+    build: ./frontend
+    ports:
+      - "127.0.0.1:8080:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+  telegram:
+    profiles: [telegram]
+    build: ./backend
+    command: ["python", "-m", "app.telegram_bot.bot"]
+    environment:
+      DATABASE_URL: sqlite:////data/scamshield.db
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      TELEGRAM_BOT_USERNAME: ${TELEGRAM_BOT_USERNAME:-}
+      TELEGRAM_WEBHOOK_URL: ${TELEGRAM_WEBHOOK_URL:-}
+      TELEGRAM_WEBHOOK_SECRET: ${TELEGRAM_WEBHOOK_SECRET:-}
+      OCR_LANGUAGES: eng+msa
+    volumes:
+      - data:/data
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+  retention:
+    profiles: [maintenance]
+    build: ./backend
+    command: ["sh", "-c", "while true; do python -m app.cli cleanup; sleep 86400; done"]
+    environment:
+      DATABASE_URL: sqlite:////data/scamshield.db
+      HISTORY_RETENTION_DAYS: ${HISTORY_RETENTION_DAYS:-30}
+    volumes:
+      - data:/data
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+volumes:
+  data:

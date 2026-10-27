@@ -1,0 +1,20 @@
+{
+  "name": "balanced_spam_smishing",
+  "task": "text_classification",
+  "source": "Munoz & Islam, A Balanced Dataset for Spam and Smishing Detection using LLMs, version 1",
+  "doi": "10.17632/vmg875v4xs.1",
+  "license": "CC BY 4.0",
+  "download_date": "2026-10-27",
+  "raw_rows": 10191,
+  "processed_rows": 7376,
+  "excluded_conflicting_normalized_texts": 35,
+  "class_distribution": {
+    "ham": 3393,
+    "smishing": 2331,
+    "spam": 1652
+  },
+  "processed_sha256": "fb2ab785a94e5e6ef9cd2ba7f0f1c09027b10ef0da917c29a387c2c13cd2ee8c",
+  "processed_file": "balanced_spam_smishing.csv",
+  "permission_basis": "Public dataset released under CC BY 4.0; attribution required.",
+  "labeling_method": "Labels supplied by dataset authors; conflicting exact normalized duplicates excluded."
+}
