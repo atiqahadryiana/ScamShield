@@ -27,6 +27,8 @@ def client(monkeypatch):
     app.dependency_overrides[get_db] = override
     monkeypatch.setattr('app.main.limiter', RateLimiter())
     monkeypatch.setattr('app.main.SessionLocal', factory)
+    # API tests must never depend on or call a configured external reputation service.
+    monkeypatch.setattr('app.api.routes.check_phishtank', lambda assessment, *_: assessment)
     with TestClient(app, headers={'X-ScamShield-Client': 'web'}) as test:
         yield test
     app.dependency_overrides.clear()

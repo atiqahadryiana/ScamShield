@@ -25,10 +25,11 @@ metrics, and administrative changes can disappear whenever the function
 instance is recycled. The health response reports `"storage":"ephemeral"` in
 this mode. Configure and migrate PostgreSQL before relying on persistence.
 
-OCR requires a Tesseract executable and language packs. The standard Vercel
-Python function does not install the repository's Docker image packages, so OCR
-will return its documented 503 fallback unless the backend is changed to a
-container service or another OCR implementation is configured. The Telegram
+Server OCR requires a Tesseract executable and language packs. The standard
+Vercel Python function does not install the repository's Docker image packages,
+so the web screenshot scanner falls back to on-device Tesseract.js OCR in the
+browser. The backend endpoint still returns its documented 503 response, and
+Telegram screenshot OCR still requires a container service with Tesseract. The Telegram
 polling process is not included as a Vercel service because it is a continuous
 worker; deploy it separately or implement an HTTPS webhook function.
 
